@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function DrawingBoard() {
   const [lineWidth, setLineWidth] = useState(5);
@@ -6,9 +6,14 @@ function DrawingBoard() {
   const [isPainting, setIsPainting] = useState(false);
   const [isFilling, setIsFilling] = useState(false);
 
+  // const canvas = document.querySelector("canvas");
+  const canvasRef = useRef(null);
+  const canvas = canvasRef.current;
+  const ctx = canvas.getContext("2d");
+
   const handleMouseMove = (event) => {
     if (isPainting && !isFilling) {
-      draw(event.offsetX, event.offsetY);
+      draw(event.nativeEvent.offsetX, event.nativeEvent.offsetY);
     }
   };
 
@@ -18,16 +23,18 @@ function DrawingBoard() {
 
   const stopPainting = () => {
     setIsPainting(false);
+    ctx.beginPath();
   };
 
   const draw = (x, y) => {
-    const canvas = document.querySelector("canvas");
-    const ctx = canvas.getContext("2d");
     ctx.lineWidth = lineWidth;
     ctx.strokeStyle = color;
-
-    ctx.lineTo(x, y);
-    ctx.stroke();
+    if (isPainting) {
+      ctx.lineTo(x, y);
+      ctx.stroke();
+      return;
+    }
+    ctx.moveTo(x, y);
   };
 
   const handleCanvasClick = () => {
@@ -37,8 +44,6 @@ function DrawingBoard() {
   };
 
   const fillCanvas = () => {
-    const canvas = document.querySelector("canvas");
-    const ctx = canvas.getContext("2d");
     ctx.fillStyle = color;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
@@ -59,9 +64,22 @@ function DrawingBoard() {
     setIsFilling((prev) => !prev);
   };
 
+  const colorOptions = [
+    "#ff9ff3",
+    "#ff9f43",
+    "#ff6b6b",
+    "#48dbfb",
+    "#1dd1a1",
+    "#5f27cd",
+    "#c8d6e5",
+    "#222f3e",
+    "#576574",
+  ];
+
   return (
     <div>
       <canvas
+        ref={canvasRef}
         onMouseMove={handleMouseMove}
         onMouseDown={startPainting}
         onMouseUp={stopPainting}
@@ -78,8 +96,6 @@ function DrawingBoard() {
       />
       <input type="color" value={color} onChange={handleColorChange} />
       <div>
-        {/* Color options */}
-        {/* Assume colorOptions array contains color values */}
         {colorOptions.map((colorValue, index) => (
           <div
             key={index}
