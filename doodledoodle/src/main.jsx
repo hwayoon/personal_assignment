@@ -1,10 +1,13 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-// import "./index.css";
+import "../index.css";
+import { SaveImg } from "./SaveImg.jsx";
+// import ImgSavedGallery from "./ImgSavedGallery.jsx";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+const entryPoint = document.getElementById("root");
+ReactDOM.createRoot(entryPoint).render(
+  <div>
+    {/* <App /> */}
+    <SaveImg />
+    {/* <ImgSavedGallery /> */}
+  </div>
 );
