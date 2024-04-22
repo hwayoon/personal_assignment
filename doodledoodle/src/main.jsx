@@ -1,7 +1,8 @@
 import ReactDOM from "react-dom/client";
 import "../index.css";
 import { SaveImg } from "./SaveImg.jsx";
-// import ImgSavedGallery from "./ImgSavedGallery.jsx";
+import { SaveToStorage } from "./ImgSaveToGallery.jsx";
+// import ImgSavedGallery from "./ImgSaveToGallery.jsx";
 
 const entryPoint = document.getElementById("root");
 ReactDOM.createRoot(entryPoint).render(
@@ -9,5 +10,6 @@ ReactDOM.createRoot(entryPoint).render(
     {/* <App /> */}
     <SaveImg />
     {/* <ImgSavedGallery /> */}
+    <SaveToStorage />
   </div>
 );
