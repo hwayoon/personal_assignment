@@ -6,7 +6,9 @@ const db = getFirestore(app);
 const q = query(collection(db, "images"));
 const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
-  console.log(doc.id, ":", doc.data());
+  function galleryBox() {
+    console.log(doc.id, ":", doc.data().image);
+  }
 });
 
 export function Gallery() {
