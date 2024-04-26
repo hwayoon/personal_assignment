@@ -5,16 +5,17 @@ const db = getFirestore(app);
 
 const q = query(collection(db, "images"));
 const querySnapshot = await getDocs(q);
-querySnapshot.forEach((doc) => {
-  function galleryBox() {
-    console.log(doc.id, ":", doc.data().image);
-  }
-});
+
+export function GalleryCard() {
+  querySnapshot.forEach((doc) => {
+    return <a href={doc.data().image}>click me!</a>;
+  });
+}
 
 export function Gallery() {
   return (
     <div id="gallery-container">
-      <div className="gallery-image"></div>
+      <GalleryCard />
     </div>
   );
 }
