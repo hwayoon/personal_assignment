@@ -21,8 +21,8 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {});
 });
 
-server.listen(3000, () => {
-  console.log("server running at http://localhost:3000");
+server.listen(5173, () => {
+  console.log("server running");
 });
 
 // client side?
