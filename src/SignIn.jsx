@@ -25,10 +25,22 @@ export function SignIn() {
     <form>
       <h1>sign in</h1>
       <div>
-        email: <input id="signUpEmail" type="email" required />
+        email:{" "}
+        <input
+          id="signUpEmail"
+          type="email"
+          placeholder="Enter your email"
+          required
+        />
       </div>
       <div>
-        password: <input id="signUpPassword" type="password" required />
+        password:{" "}
+        <input
+          id="signUpPassword"
+          type="password"
+          placeholder="Enter your password"
+          required
+        />
       </div>
       <button type="submit" onClick={handleSubmit}>
         sign in
